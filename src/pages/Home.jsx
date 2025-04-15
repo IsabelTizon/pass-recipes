@@ -25,7 +25,7 @@ export default function Home() {
 				<MainHome>
 					<Search /> {/* Search component */}
 					<Category /> {/* Category component */}
-					<Veggie /> {/* Veggie component */}
+					<Veggie /> {/* Veggie comp      onent */}
 					<Popular /> {/* Popular component */}
 				</MainHome>
 			</motion.div>
