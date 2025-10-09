@@ -10,7 +10,11 @@ export default function Meal({ meal }) {
 	//fetching the data fron Spoonacular API to get the daily plan cards recipes based on calories
 	useEffect(() => {
 		fetch(
-			`https://api.spoonacular.com/recipes/${meal.id}/information?apiKey=${process.env.REACT_APP_API_KEY}&includeNutrition=false`
+			`https://api.spoonacular.com/recipes/${
+				meal.id
+			}/information?apiKey=${
+				import.meta.env.VITE_API_KEY
+			}&includeNutrition=false`
 		)
 			.then((response) => response.json())
 			.then((data) => {
@@ -24,17 +28,23 @@ export default function Meal({ meal }) {
 			<Card>
 				<Link to={"/pass-recipes/recipe/" + meal.id}>
 					{/*return image */}
-					<img className="imageMealCard" src={imageUrl} alt="recipe" />
+					<img
+						className="imageMealCard"
+						src={imageUrl}
+						alt="recipe"
+					/>
 					{/*return Recipe Title*/}
 					<div>
 						<h4>{meal.title}</h4>
 						<Flex>
 							{/*return preparation time and number of servings */}
 							<p>
-								<strong>Preparation time:</strong> {meal.readyInMinutes} minutes
+								<strong>Preparation time:</strong>{" "}
+								{meal.readyInMinutes} minutes
 							</p>
 							<p>
-								<strong>Number of servings:</strong> {meal.servings}
+								<strong>Number of servings:</strong>{" "}
+								{meal.servings}
 							</p>
 						</Flex>
 					</div>

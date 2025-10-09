@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 //Splide: the carousel
 //SplideSlide: It's gonna be each individual image or card
-import { Splide, SplideSlide } from "@splidejs/react-splide";
+import {
+	Splide,
+	SplideSlide,
+} from "@splidejs/react-splide";
 import { Link } from "react-router-dom";
 //
 import "@splidejs/splide/dist/css/splide.min.css";
@@ -33,11 +36,16 @@ export default function Veggie() {
 		} else {
 			const api = await fetch(
 				// 'await' expressions are only allowed within async functions to wait to process the code before pop in in the next line
-				`https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_API_KEY}&number=9&tags=vegetarian`
+				`https://api.spoonacular.com/recipes/random?apiKey=${
+					import.meta.env.VITE_API_KEY
+				}&number=9&tags=vegetarian`
 			); //fetch 9 vegetarian recipes
 			const data = await api.json();
 
-			localStorage.setItem("veggie", JSON.stringify(data.recipes)); // Saving the array like a string
+			localStorage.setItem(
+				"veggie",
+				JSON.stringify(data.recipes)
+			); // Saving the array like a string
 			// console.log(data);
 			setVeggie(data.recipes);
 			console.log(data.recipes);
@@ -77,9 +85,14 @@ export default function Veggie() {
 							<SplideSlide key={recipe.id}>
 								{/* each card would be a slide */}
 								<Card>
-									<Link to={"/pass-recipes/recipe/" + recipe.id}>
+									<Link
+										to={"/pass-recipes/recipe/" + recipe.id}
+									>
 										{/* return img */}
-										<img src={recipe.image} alt="recipe.title" />
+										<img
+											src={recipe.image}
+											alt="recipe.title"
+										/>
 										{/*return Recipe Title*/}
 										<p>{recipe.title}</p>
 										{/* <Gradient /> */}
@@ -121,7 +134,9 @@ const Card = styled.div`
 		margin: 2% auto;
 		text-align: center;
 		font-size: 1rem;
-		background: linear-gradient((to right, #324001, #232d02));
+		background: linear-gradient(
+			(to right, #324001, #232d02)
+		);
 		display: -webkit-box;
 		-webkit-line-clamp: 1;
 		-webkit-box-orient: vertical;

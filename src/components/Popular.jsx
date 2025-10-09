@@ -2,7 +2,10 @@ import { useEffect, useState } from "react";
 
 //Splide: the carousel
 //SplideSlide: It's gonna be each individual image or card
-import { Splide, SplideSlide } from "@splidejs/react-splide";
+import {
+	Splide,
+	SplideSlide,
+} from "@splidejs/react-splide";
 import "@splidejs/splide/dist/css/splide.min.css";
 // Router navigation links
 import { Link } from "react-router-dom";
@@ -35,11 +38,16 @@ export default function Popular() {
 		} else {
 			const api = await fetch(
 				// 'await' expressions are only allowed within async functions to wait to process the code before pop in in the next line
-				`https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_API_KEY}&number=9` //fetch 9 random recipes
+				`https://api.spoonacular.com/recipes/random?apiKey=${
+					import.meta.env.VITE_API_KEY
+				}&number=9` //fetch 9 random recipes
 			);
 			const data = await api.json();
 
-			localStorage.setItem("popular", JSON.stringify(data.recipes)); // Saving the array like a string
+			localStorage.setItem(
+				"popular",
+				JSON.stringify(data.recipes)
+			); // Saving the array like a string
 			// console.log(data);
 			setPopular(data.recipes);
 			console.log(data.recipes);
@@ -80,9 +88,14 @@ export default function Popular() {
 							<SplideSlide key={recipe.id}>
 								{/* each card would be a slide*/}
 								<Card>
-									<Link to={"/pass-recipes/recipe/" + recipe.id}>
+									<Link
+										to={"/pass-recipes/recipe/" + recipe.id}
+									>
 										{/*return image */}
-										<img src={recipe.image} alt="recipe.title" />
+										<img
+											src={recipe.image}
+											alt="recipe.title"
+										/>
 										{/*return Recipe Title*/}
 										<Box>
 											{/*return title img */}
