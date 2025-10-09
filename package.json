@@ -15,6 +15,7 @@
 		"@testing-library/jest-dom": "^5.16.5",
 		"@testing-library/react": "^13.4.0",
 		"@testing-library/user-event": "^13.5.0",
+		"@vitejs/plugin-react-swc": "^4.1.0",
 		"framer-motion": "^10.12.7",
 		"gh-pages": "^5.0.0",
 		"lodash": "^4.17.21",
@@ -22,18 +23,18 @@
 		"react-dom": "^18.2.0",
 		"react-icons": "^4.8.0",
 		"react-router-dom": "^6.11.1",
-		"react-scripts": "^5.0.1",
 		"styled-components": "^5.3.10",
+		"vite": "^7.1.9",
+		"vite-plugin-svgr": "^4.5.0",
+		"vite-tsconfig-paths": "^5.1.4",
 		"web-vitals": "^2.1.4",
 		"zustand": "^4.3.8"
 	},
 	"scripts": {
-		"start": "react-scripts start",
-		"build": "react-scripts build",
-		"test": "react-scripts test",
-		"eject": "react-scripts eject",
-		"predeploy": "npm run build",
-		"deploy": "gh-pages -d build"
+		"dev": "vite",
+		"build": "vite build",
+		"lint": "eslint .",
+		"preview": "vite preview"
 	},
 	"eslintConfig": {
 		"extends": [
