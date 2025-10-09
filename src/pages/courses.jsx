@@ -31,21 +31,38 @@ export default function Courses() {
 		<>
 			<MainCourses>
 				<Box sx={containerTitle}>
-					<Typography sx={title}>Pass Recipe Courses</Typography>
+					<Typography sx={title}>
+						Pass Recipe Courses
+					</Typography>
 				</Box>
 				<Box sx={wrapCourses}>
 					{/* map() method to create a new array with the elements of the soreItems array */}
 					{storeItems.map((item) => (
-						<CardCourse key={item.id} sx={{ maxWidth: 345, mb: 5 }}>
+						<CardCourse
+							key={item.id}
+							sx={{ maxWidth: 345, mb: 5 }}
+						>
 							<CardHeader
 								// Avatar image of the web
 								avatar={
-									<Avatar sx={{ bgcolor: green[800] }} aria-label="course">
-										<img src={Logo} width="40" height="30" alt="logo"></img>
+									<Avatar
+										sx={{ bgcolor: green[800] }}
+										aria-label="course"
+									>
+										<img
+											src={Logo}
+											width="40"
+											height="30"
+											alt="logo"
+										></img>
 									</Avatar>
 								}
 								//Title of the course
-								title={<Typography sx={titleCart}>{item.name}</Typography>}
+								title={
+									<Typography sx={titleCart}>
+										{item.name}
+									</Typography>
+								}
 								//Subtitle
 								subheader={
 									<Box sx={subheaderCart}>
@@ -59,16 +76,21 @@ export default function Courses() {
 								}
 							/>
 							{/* Image */}
-							{/* the source need to have process.env.PUBLIC_URL to can access the public files because in the production I couldn't see then without process.env.PUBLIC_URL */}
+							{/* the source need to have import.meta.env.BASE_URL to can access the public files because in the production I couldn't see then without import.meta.env.BASE_URL */}
 							<CardMedia
 								component="img"
 								height="194"
-								image={process.env.PUBLIC_URL + item.imgUrl}
+								image={
+									import.meta.env.BASE_URL + item.imgUrl
+								}
 								alt="courseImage"
 							/>
 							{/* Description of the course */}
 							<CardContent>
-								<Typography variant="body2" color="text.secondary">
+								<Typography
+									variant="body2"
+									color="text.secondary"
+								>
 									{item.cardContent}
 								</Typography>
 							</CardContent>

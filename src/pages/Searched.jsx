@@ -10,14 +10,17 @@ import styled from "styled-components";
 import { devices } from "../Theme";
 
 export default function Searched() {
-	const [searchedRecipes, setSearchedRecipes] = useState([]);
+	const [searchedRecipes, setSearchedRecipes] = useState(
+		[]
+	);
 	//The useParams hook returns an object of key/value pairs of the dynamic params from the current URL that were matched by the <Route path>.
 	let params = useParams();
 
 	const getSearched = async (name) => {
 		const check =
 			// I was having problems to render the images because the local storage veggie value was the string of undefine. I created a condition to make false the undefine value and that the condition could be met the getItem veggie.
-			localStorage.getItem("searchedRecipes") === "undefined" // If the local storage is "undefined" return false
+			localStorage.getItem("searchedRecipes") ===
+			"undefined" // If the local storage is "undefined" return false
 				? false
 				: // if not return the localStorage
 				  localStorage.getItem("searchedRecipes"); // get in the
@@ -28,13 +31,18 @@ export default function Searched() {
 		} else {
 			//fetching the Spoonacular API to see the input searched
 			const data = await fetch(
-				`https://api.spoonacular.com/recipes/complexSearch?apiKey=${process.env.REACT_APP_API_KEY}&query=${name}`
+				`https://api.spoonacular.com/recipes/complexSearch?apiKey=${
+					import.meta.env.VITE_API_KEY
+				}&query=${name}`
 			);
 
 			const recipes = await data.json();
 			// 'await' expressions are only allowed within async functions to wait to process the code before pop in in the next line
 
-			localStorage.setItem("searched", JSON.stringify(recipes.results));
+			localStorage.setItem(
+				"searched",
+				JSON.stringify(recipes.results)
+			);
 
 			setSearchedRecipes(recipes.results);
 		}
@@ -75,7 +83,10 @@ export default function Searched() {
 
 const Grid = styled.div`
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+	grid-template-columns: repeat(
+		auto-fit,
+		minmax(15rem, 1fr)
+	);
 	grid-gap: 2rem;
 	width: 90%;
 	margin: 5% auto;

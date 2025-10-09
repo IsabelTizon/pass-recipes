@@ -23,7 +23,9 @@ export default function MealPlanning() {
 	const getMealData = async () => {
 		const api = await fetch(
 			// 'await' expressions are only allowed within async functions to wait to process the code before pop in in the next line
-			`https://api.spoonacular.com/mealplanner/generate?apiKey=${process.env.REACT_APP_API_KEY}&timeFrame=day&targetCalories=${calories}` //fetching the daily recipes per calories with the Spoonacular API
+			`https://api.spoonacular.com/mealplanner/generate?apiKey=${
+				import.meta.env.VITE_API_KEY
+			}&timeFrame=day&targetCalories=${calories}` //fetching the daily recipes per calories with the Spoonacular API
 		);
 
 		const data = await api.json();
@@ -35,12 +37,17 @@ export default function MealPlanning() {
 		<>
 			<Hero>
 				{/* Hero image */}
-				<img className="hero" src={hero} alt="hero meal plan" />
+				<img
+					className="hero"
+					src={hero}
+					alt="hero meal plan"
+				/>
 				{/* React Fragment */}
 				<Plan>
 					<h1>Get Daily Meal Plan</h1>
 					<h4>
-						Choose your daily plan based in the calories you want to ingest
+						Choose your daily plan based in the calories you
+						want to ingest
 					</h4>
 					<form>
 						<input

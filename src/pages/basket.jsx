@@ -1,7 +1,11 @@
 //React
 import { Link } from "react-router-dom";
 //Mui Materials
-import { Box, Typography, Button as CommomButton } from "@mui/material";
+import {
+	Box,
+	Typography,
+	Button as CommomButton,
+} from "@mui/material";
 
 //Links
 import { formatCurrency } from "../utilities/formatCurrency";
@@ -30,9 +34,11 @@ export default function Basket() {
 						<CardCourse key={item.id}>
 							<BoxLeft>
 								<ImageCourse>
-									{/* the source need to have process.env.PUBLIC_URL to can access the public files because in the production I couldn't see then without process.env.PUBLIC_URL */}
+									{/* the source need to have import.meta.env.BASE_URL to can access the public files because in the production I couldn't see then without import.meta.env.BASE_URL */}
 									<img
-										src={process.env.PUBLIC_URL + item.imgUrl}
+										src={
+											import.meta.env.BASE_URL + item.imgUrl
+										}
 										alt={item.name}
 									/>
 								</ImageCourse>
@@ -42,7 +48,8 @@ export default function Basket() {
 									<TitleCard>
 										{/* formatCurrency() to add commas and decimals in the correct positions and to put each price output based on the currency with
 										proper formatting. */}
-										{item.name}: {formatCurrency(item.price)}
+										{item.name}:{" "}
+										{formatCurrency(item.price)}
 									</TitleCard>
 								</Box>
 
@@ -62,15 +69,25 @@ export default function Basket() {
 											<Quantity>2</Quantity>
 										</QuantityCounter>
 										{/* INCREASE */}
-										<CommomButton sx={btnQuantity}>+</CommomButton>
+										<CommomButton sx={btnQuantity}>
+											+
+										</CommomButton>
 									</ContainerBtns>
 
 									{/* DELEATE */}
 									<ContainerDelete>
-										<Typography>{formatCurrency(item.price)}</Typography>
+										<Typography>
+											{formatCurrency(item.price)}
+										</Typography>
 										{/* delete icon to delete item throught event handler function onclick to make the arrow function deleteBtn taking the global item from the array myItems store in store/appStore */}
-										<Box sx={deleteStyles} onClick={() => deleteBtn(item)}>
-											<DeleteOutlinedIcon fontSize="large" color="#505c26" />
+										<Box
+											sx={deleteStyles}
+											onClick={() => deleteBtn(item)}
+										>
+											<DeleteOutlinedIcon
+												fontSize="large"
+												color="#505c26"
+											/>
 										</Box>
 									</ContainerDelete>
 								</BoxBottom>
@@ -84,10 +101,14 @@ export default function Basket() {
 		//If there is not item in the basket show the next message
 		return (
 			<Box sx={containerCartEmpty}>
-				<Typography sx={headerEmptyBasket}>Your basket is empty</Typography>
+				<Typography sx={headerEmptyBasket}>
+					Your basket is empty
+				</Typography>
 				{/* Button to go to Courses page */}
 				<Link to="/pass-recipes/courses">
-					<CommomButton sx={buttonStyles}>Go to Courses</CommomButton>
+					<CommomButton sx={buttonStyles}>
+						Go to Courses
+					</CommomButton>
 				</Link>
 			</Box>
 		);

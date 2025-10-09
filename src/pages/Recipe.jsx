@@ -19,20 +19,22 @@ export default function Recipe() {
 	const [activeTab, setActiveTab] = useState("Recipe"); //Active Buttons
 	//set elaboration button by default when the page is render
 
-	const fetchDetails = async () => {
-		const data = await fetch(
-			// 'await' expressions are only allowed within async functions to wait to process the code before pop in in the next line
-			`https://api.spoonacular.com/recipes/${params.name}/information?apiKey=${process.env.REACT_APP_API_KEY}` //fetching the description of the recipe with the Spoonacular API
-		);
-		const detailData = await data.json();
-		setDetails(detailData);
-	};
-
 	//The useEffect Hook allows you to perform side effects in your components like fetching the recipe details
 	// the useEffect  always have two parameters: 1 f() and one array of dependencies, this last one can be empty
 	useEffect(() => {
-		fetchDetails(); //f()
-	}, [params.name]); // dependency array,
+		const fetchDetails = async () => {
+			const data = await fetch(
+				`https://api.spoonacular.com/recipes/${
+					params.name
+				}/information?apiKey=${
+					import.meta.env.VITE_API_KEY
+				}`
+			);
+			const detailData = await data.json();
+			setDetails(detailData);
+		};
+		fetchDetails();
+	}, [params.name]);
 
 	return (
 		<DetailWrapper>
@@ -53,7 +55,9 @@ export default function Recipe() {
 						<Button
 							sx={buttonStyles}
 							size="small"
-							className={activeTab === "Recipe" ? "active" : ""}
+							className={
+								activeTab === "Recipe" ? "active" : ""
+							}
 							onClick={() => setActiveTab("Recipe")} //when click the button (event handler function onclick) activate the tab elaboration and show the elaboration description of the recipe
 						>
 							Recipe
@@ -61,7 +65,9 @@ export default function Recipe() {
 						<Button
 							sx={buttonStyles}
 							size="medium"
-							className={activeTab === "Ingredients" ? "active" : ""}
+							className={
+								activeTab === "Ingredients" ? "active" : ""
+							}
 							onClick={() => setActiveTab("Ingredients")} //when click the button (event handler function onclick) activate the tab ingredients and show the ingredients of the recipe
 						>
 							Ingredients
@@ -70,17 +76,29 @@ export default function Recipe() {
 					{/* Elaboration tab */}
 					{activeTab === "Recipe" ? (
 						<div>
-							<h4 dangerouslySetInnerHTML={{ __html: details.summary }}></h4>
-							<h4 dangerouslySetInnerHTML={{ __html: details.recipe }}></h4>
+							<h4
+								dangerouslySetInnerHTML={{
+									__html: details.summary,
+								}}
+							></h4>
+							<h4
+								dangerouslySetInnerHTML={{
+									__html: details.recipe,
+								}}
+							></h4>
 						</div>
 					) : null}
 
 					{/* Ingredients tab */}
 					{activeTab === "Ingredients" ? (
 						<ul>
-							{details.extendedIngredients.map((ingredient) => (
-								<li key={ingredient.id}>{ingredient.original}</li>
-							))}
+							{details.extendedIngredients.map(
+								(ingredient) => (
+									<li key={ingredient.id}>
+										{ingredient.original}
+									</li>
+								)
+							)}
 						</ul>
 					) : null}
 				</section>

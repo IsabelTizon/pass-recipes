@@ -36,7 +36,9 @@ function Cuisine() {
 	const getCuisine = async (name) => {
 		//fetchin the data from Spoonacular API to get different cuisines by their name
 		const data = await fetch(
-			`https://api.spoonacular.com/recipes/complexSearch?apiKey=${process.env.REACT_APP_API_KEY}&cuisine=${name}`
+			`https://api.spoonacular.com/recipes/complexSearch?apiKey=${
+				import.meta.env.VITE_API_KEY
+			}&cuisine=${name}`
 		);
 
 		const cuisine = await data.json();
@@ -89,7 +91,10 @@ const Flex = styled.div`
 `;
 const Grid = styled(motion.div)`
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+	grid-template-columns: repeat(
+		auto-fit,
+		minmax(15rem, 1fr)
+	);
 	grid-gap: 3rem;
 	margin-top: 5%;
 	margin-bottom: 15%;
